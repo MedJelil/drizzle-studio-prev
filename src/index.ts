@@ -1,4 +1,14 @@
 import "dotenv/config";
-import { drizzle } from "drizzle-orm/mysql2";
+import { resolveDialect } from "./db/dialect";
 
-const db = drizzle(process.env.DATABASE_URL!);
+export async function makeDb() {
+  const url = process.env.DATABASE_URL!;
+
+  if (resolveDialect(url) === "postgresql") {
+    const { drizzle } = await import("drizzle-orm/node-postgres");
+    return drizzle(url);
+  }
+
+  const { drizzle } = await import("drizzle-orm/mysql2");
+  return drizzle(url);
+}
