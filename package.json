@@ -9,7 +9,7 @@
     "pull": "drizzle-kit pull"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jelil",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^17.2.3",
